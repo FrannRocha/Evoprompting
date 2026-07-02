@@ -24,13 +24,11 @@ Clona este repo dentro de tu directorio de skills:
 
 ```bash
 # macOS/Linux
-git clone https://github.com/FrannRocha/Evopromting.git ~/.claude/skills/evoprompting
+git clone https://github.com/FrannRocha/Evoprompting.git ~/.claude/skills/evoprompting
 
 # Windows PowerShell
-git clone https://github.com/FrannRocha/Evopromting.git $env:USERPROFILE\.claude\skills\evoprompting
+git clone https://github.com/FrannRocha/Evoprompting.git $env:USERPROFILE\.claude\skills\evoprompting
 ```
-
-> Nota: la URL del repo dice `Evopromting` (nombre histórico); si el repo se renombra a `Evoprompting`, GitHub redirige la URL vieja automáticamente.
 
 Luego invócala con `/evoprompting` en tu sesión.
 
