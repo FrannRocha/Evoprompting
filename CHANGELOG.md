@@ -2,6 +2,21 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.2.1] — 2026-07-02
+
+### Changed
+- **Calificación en el chat sin barras de bloques**: el formato pasa de `📊 Dificultad: 6/10 ██████░░░░ …` a la línea limpia en negritas `📊 Dificultad: 6/10 · Prompt: 7/10` — los caracteres `░` se renderean como barras blancas en varias interfaces (feedback de Francisco; corregido con la reconstrucción de §8 editando solo el bloque culpable de `SKILL.md` §6.1). El mismo formato aplica en títulos y cuerpos de PR.
+
+### Fixed
+- Los archivos de la v2.2.0 (`statusline.sh`, `install.sh` y la regla de `evo-score`) no habían llegado a `main` porque el PR #2 se mergeó antes del último push; esta versión los incluye.
+
+## [2.2.0] — 2026-07-02
+
+### Added
+- **Barra integrada a la UI de Claude Code** (`statusline.sh`): chips `DF N/10 · Promt M/10` en la statusline nativa, con color por rango (DF alto = rojo, prompt bien planteado = verde). La skill escribe las notas en `~/.claude/evo-score` (regla nueva en `SKILL.md` §6.1) y el script las pinta.
+- **`install.sh`**: instala la skill y configura la statusline sin pisar una existente. Con `--siempre`, agrega una regla global (`~/.claude/CLAUDE.md`) para que DF/Promt se califiquen en **todos** los proyectos, aunque no usen Evoprompting — pensado para ayudar a iterar en cualquier lado.
+- **Tip de iteración**: cuando Prompt ≤ 6, Claude dice en una línea cómo plantear mejor la próxima petición (en el chat y como parte del marcador permanente).
+
 ## [2.1.0] — 2026-07-02
 
 ### Added
