@@ -117,18 +117,16 @@ bloque culpable. Detalle: skill `evoprompting`.
 
 Eso activa el automatismo **solo en ese proyecto**, sin sobre-activarlo en los demás.
 
-## La barra de calificación
+## La calificación DF/Promt
 
-Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con esta barra — la ves directo en el chat, igual que ves los contadores de GitHub:
+Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con esta línea — la ves directo en el chat, igual que ves los contadores de GitHub:
 
-```
-📊 Dificultad: 6/10 ██████░░░░ · Prompt: 7/10 ███████░░░
-```
+**📊 Dificultad: 6/10 · Prompt: 7/10**
 
 - **Dificultad (DF)** — qué tan difícil es la tarea (¿hay documentación?, ¿qué probabilidad hay de resolverla con los recursos de la sesión?).
 - **Prompt** — qué tan bien planteada estaba tu petición (claridad, contexto, restricciones). Sube si dejas que Claude la evoprompteé antes de ejecutar. Si sale ≤ 6, Claude te dice en una línea cómo plantearla mejor para la siguiente iteración.
 
-Si el trabajo termina en un pull request, la calificación se repite al final del título del PR y la barra al inicio de su descripción.
+Si el trabajo termina en un pull request, la misma calificación se repite al final del título del PR y al inicio de su descripción.
 
 ### La barra integrada a la UI (statusline)
 

@@ -2,6 +2,14 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.2.1] — 2026-07-02
+
+### Changed
+- **Calificación en el chat sin barras de bloques**: el formato pasa de `📊 Dificultad: 6/10 ██████░░░░ …` a la línea limpia en negritas `📊 Dificultad: 6/10 · Prompt: 7/10` — los caracteres `░` se renderean como barras blancas en varias interfaces (feedback de Francisco; corregido con la reconstrucción de §8 editando solo el bloque culpable de `SKILL.md` §6.1). El mismo formato aplica en títulos y cuerpos de PR.
+
+### Fixed
+- Los archivos de la v2.2.0 (`statusline.sh`, `install.sh` y la regla de `evo-score`) no habían llegado a `main` porque el PR #2 se mergeó antes del último push; esta versión los incluye.
+
 ## [2.2.0] — 2026-07-02
 
 ### Added
