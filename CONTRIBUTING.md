@@ -1,6 +1,6 @@
 # Contribuciones
 
-¡Gracias por querer mejorar Evopromting!
+¡Gracias por querer mejorar Evoprompting!
 
 ## Cómo reportar bugs
 
@@ -14,7 +14,7 @@ Si encontraste un problema:
 
 ## Cómo proponer mejoras
 
-¿Tienes una idea para mejorar Evopromting?
+¿Tienes una idea para mejorar Evoprompting?
 1. Abre un issue con la etiqueta `enhancement` describiendo:
    - El problema que resuelve.
    - Cómo afecta a los usuarios.
@@ -25,7 +25,7 @@ Si encontraste un problema:
 
 1. Haz un **fork** del repo.
 2. Crea una rama: `git checkout -b feature/tu-idea`.
-3. Haz tus cambios respetando **Evopromting** (este proyecto se aplica la metodología a sí mismo: cada bloque de `SKILL.md` lleva su comentario EVO).
+3. Haz tus cambios respetando **Evoprompting** (este proyecto se aplica la metodología a sí mismo: cada bloque de `SKILL.md` lleva su comentario EVO).
 4. Actualiza `README.md` y `SKILL.md` si hay cambios en el formato.
 5. Envía un PR describiendo qué cambia y por qué.
 
@@ -43,4 +43,4 @@ Abre un issue con la etiqueta `question` o contáctame en LinkedIn.
 
 ---
 
-Gracias por contribuir a que Evopromting sea mejor. 🙌
+Gracias por contribuir a que Evoprompting sea mejor. 🙌

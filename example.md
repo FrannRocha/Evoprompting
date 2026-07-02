@@ -1,6 +1,6 @@
-# Ejemplos de Evopromting
+# Ejemplos de Evoprompting
 
-Este archivo muestra cómo usar Evopromting en diferentes contextos.
+Este archivo muestra cómo usar Evoprompting en diferentes contextos.
 
 ## Ejemplo 1: Instrucción en Markdown
 
@@ -47,9 +47,9 @@ system:
 `package.json`:
 ```json
 {
-  "name": "evopromting-example",
+  "name": "evoprompting-example",
   "version": "1.0.0",
-  "description": "Evopromting skill"
+  "description": "Evoprompting skill"
 }
 ```
 
@@ -88,7 +88,7 @@ export function SkillCard({ skill, onSelect }) {
 CREATE INDEX idx_jobs_skill_id ON jobs(skill_id);
 ```
 
-## Ejemplo 8: `/evopromting evaluar` — evaluación previa de una tarea
+## Ejemplo 8: `/evoprompting evaluar` — evaluación previa de una tarea
 
 Petición del usuario: *"arréglame el servidor de correo, está caído"*
 
@@ -101,15 +101,15 @@ Vía de ejecución: no hay MCP → pediré control remoto del equipo; si buscas 
 Cooperación: necesito 3 datos al 100%: (1) sistema operativo y software de correo, (2) desde cuándo falla, (3) acceso o control remoto. Sin el punto 3 la dificultad sube a 10.
 ```
 
-## Ejemplo 9: `/evopromting mejorar` — evopromtear una petición
+## Ejemplo 9: `/evoprompting mejorar` — evopromptear una petición
 
 Petición original: *"hazme un bot para mi negocio"*
 
-Versión evopromteada (cada parte anotada para poder depurarla por separado después):
+Versión evoprompteada (cada parte anotada para poder depurarla por separado después):
 
 ```markdown
 Eres un arquitecto de IA con 10 años de experiencia en chatbots de atención al cliente.
-<!-- EVO · PERSONALIDAD: fija rol y nivel. POR QUÉ: sin esto el resultado sale genérico. FUENTE: skill evopromting §7. EFECTIVIDAD: sin medir. CAMBIOS: ninguno. -->
+<!-- EVO · PERSONALIDAD: fija rol y nivel. POR QUÉ: sin esto el resultado sale genérico. FUENTE: skill evoprompting §7. EFECTIVIDAD: sin medir. CAMBIOS: ninguno. -->
 
 Contexto: negocio de comida a domicilio en Monterrey; los clientes preguntan por WhatsApp horarios, menú y estado de su pedido.
 <!-- EVO · CONTEXTO: dónde está parado el problema. POR QUÉ: sin contexto el bot resuelve el negocio equivocado. FUENTE: respuestas del usuario en evaluar. EFECTIVIDAD: sin medir. CAMBIOS: ninguno. -->
@@ -127,7 +127,7 @@ El usuario dice: *"el bot responde muy formal, mis clientes son jóvenes"*.
 
 **Mal (parche a ciegas):** agregar "sé más casual" en cualquier parte.
 
-**Bien (Evopromting §8):** reconstruir el prompt que sí habría funcionado — el bloque PERSONALIDAD debió decir "tono casual, norteño, con emojis" — y editar SOLO ese bloque:
+**Bien (Evoprompting §8):** reconstruir el prompt que sí habría funcionado — el bloque PERSONALIDAD debió decir "tono casual, norteño, con emojis" — y editar SOLO ese bloque:
 
 ```markdown
 Eres un asistente de comida a domicilio con tono casual y cercano (es-MX norteño, emojis con moderación).

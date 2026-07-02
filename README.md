@@ -1,12 +1,12 @@
-# Evopromting
+# Evoprompting
 
 > Los prompts evolucionan como el código: se comentan, se depuran por partes y aprenden de cada error.
 
 **El problema:** cuando usas IA, el primer resultado te da ~70% del trabajo en 10–15 minutos. El otro 30% lo consigues iterando a ciegas y te toma días — el ahorro de tiempo se evapora, o recortas calidad para no iterar.
 
-**La solución:** Evopromting trata los prompts como código comentado y refactorizable. Cada bloque de instrucción lleva un comentario que explica **qué hace**, **por qué se eligió así**, **de dónde salió**, **qué tan bien funciona** y **su historial de cambios**. Y antes de cada tarea no trivial, el modelo evalúa la dificultad, sus recursos y tu cooperación — con honestidad brutal.
+**La solución:** Evoprompting trata los prompts como código comentado y refactorizable. Cada bloque de instrucción lleva un comentario que explica **qué hace**, **por qué se eligió así**, **de dónde salió**, **qué tan bien funciona** y **su historial de cambios**. Y antes de cada tarea no trivial, el modelo evalúa la dificultad, sus recursos y tu cooperación — con honestidad brutal.
 
-Probada con **Claude Fable 5** (familia Claude 5) en Claude Code; el formato es agnóstico y funciona con cualquier modelo que lea instrucciones.
+Funciona con **cualquier modelo** que lea instrucciones (Claude, GPT, Gemini, DeepSeek…) y con cualquier herramienta donde escribas prompts. No hay nada que ajustar por modelo: es metodología, no código.
 
 ## Los 5 pilares
 
@@ -24,13 +24,15 @@ Clona este repo dentro de tu directorio de skills:
 
 ```bash
 # macOS/Linux
-git clone https://github.com/FrannRocha/Evopromting.git ~/.claude/skills/evopromting
+git clone https://github.com/FrannRocha/Evopromting.git ~/.claude/skills/evoprompting
 
 # Windows PowerShell
-git clone https://github.com/FrannRocha/Evopromting.git $env:USERPROFILE\.claude\skills\evopromting
+git clone https://github.com/FrannRocha/Evopromting.git $env:USERPROFILE\.claude\skills\evoprompting
 ```
 
-Luego invócala con `/evopromting` en tu sesión.
+> Nota: la URL del repo dice `Evopromting` (nombre histórico); si el repo se renombra a `Evoprompting`, GitHub redirige la URL vieja automáticamente.
+
+Luego invócala con `/evoprompting` en tu sesión.
 
 ### En otra herramienta
 
@@ -40,11 +42,11 @@ Si no usas Claude Code, copia el contenido de `SKILL.md` a tu system prompt o ar
 
 | Comando | Qué hace |
 |---|---|
-| `/evopromting anotar` | Comenta el bloque que acabas de crear/editar (automático en proyectos que adoptaron la skill) |
-| `/evopromting auditar <archivo>` | Reporta bloques sin comentario, campos faltantes o historial mal fechado — sin tocar nada |
-| `/evopromting arreglar <archivo>` | Completa y normaliza comentarios; muestra el diff y pide confirmación antes de escribir |
-| `/evopromting evaluar <tarea>` | Dificultad 1–10 con razones + inventario de recursos + vía de ejecución + cooperación |
-| `/evopromting mejorar <petición>` | Reescribe tu petición como un prompt estructurado por partes, cada parte anotada |
+| `/evoprompting anotar` | Comenta el bloque que acabas de crear/editar (automático en proyectos que adoptaron la skill) |
+| `/evoprompting auditar <archivo>` | Reporta bloques sin comentario, campos faltantes o historial mal fechado — sin tocar nada |
+| `/evoprompting arreglar <archivo>` | Completa y normaliza comentarios; muestra el diff y pide confirmación antes de escribir |
+| `/evoprompting evaluar <tarea>` | Dificultad 1–10 con razones + inventario de recursos + vía de ejecución + cooperación |
+| `/evoprompting mejorar <petición>` | Reescribe tu petición como un prompt estructurado por partes, cada parte anotada |
 
 ## El formato del comentario
 
@@ -93,19 +95,19 @@ Elige la sintaxis del lenguaje para que el comentario no rompa ni se ejecute:
 
 Así el prompt mejora con cada iteración en minutos, no en días — y la calidad no se sacrifica por el tiempo.
 
-## Adoptar Evopromting en un proyecto
+## Adoptar Evoprompting en un proyecto
 
 Agrega a tu `CLAUDE.md` o `SKILL.md`:
 
 ```markdown
-**Evopromting activo en este proyecto.** En todo prompt/instrucción interna que la IA lee
+**Evoprompting activo en este proyecto.** En todo prompt/instrucción interna que la IA lee
 (no en entregables que ve el cliente), agrega debajo de cada bloque:
 
 `EVO · ETIQUETA: qué hace · POR QUÉ: razón / resultado · FUENTE: de dónde salió · EFECTIVIDAD: sin medir · CAMBIOS: AAAA-MM-DD → qué cambió`
 
 Al editar un bloque, agrega una línea fechada a `CAMBIOS` y nunca borres el historial.
 Ante feedback negativo, reconstruye el prompt que sí habría funcionado y edita solo el
-bloque culpable. Detalle: skill `evopromting`.
+bloque culpable. Detalle: skill `evoprompting`.
 ```
 
 Eso activa el automatismo **solo en ese proyecto**, sin sobre-activarlo en los demás.
