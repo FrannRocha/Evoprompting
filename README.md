@@ -112,7 +112,7 @@ Eso activa el automatismo **solo en ese proyecto**, sin sobre-activarlo en los d
 
 ## La barra de calificación
 
-Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con esta barra — la ves directo en el chat, igual que ves los contadores `+287 −171` de GitHub:
+Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con esta barra — la ves directo en el chat, igual que ves los contadores de GitHub:
 
 ```
 📊 Dificultad: 6/10 ██████░░░░ · Prompt: 7/10 ███████░░░
