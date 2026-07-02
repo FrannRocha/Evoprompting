@@ -1,159 +1,141 @@
-# VIBE Promting
+# Evoprompting
 
-> Una metodología portátil para comentar, depurar y mantener prompts de IA como código.
+> Los prompts evolucionan como el código: se comentan, se depuran por partes y aprenden de cada error.
 
-VIBE promting trata los prompts y instrucciones de IA como código comentado y refactorizable: cada bloque de instrucción lleva un comentario que explica **qué hace**, **por qué se eligió así**, **de dónde salió**, **qué tan bien funciona** y **su historial de cambios**. Cuando un resultado no gusta, ubicas el bloque culpable por su comentario, lo editas y anotas el cambio—sin perder memoria de por qué estaba así.
+**El problema:** cuando usas IA, el primer resultado te da ~70% del trabajo en 10–15 minutos. El otro 30% lo consigues iterando a ciegas y te toma días — el ahorro de tiempo se evapora, o recortas calidad para no iterar.
 
-## ¿Por qué VIBE?
+**La solución:** Evoprompting trata los prompts como código comentado y refactorizable. Cada bloque de instrucción lleva un comentario que explica **qué hace**, **por qué se eligió así**, **de dónde salió**, **qué tan bien funciona** y **su historial de cambios**. Y antes de cada tarea no trivial, el modelo evalúa la dificultad, sus recursos y tu cooperación — con honestidad brutal.
 
-- **Mantenimiento a largo plazo:** los prompts se degradan o se olvida por qué se escribieron así. Los comentarios VIBE preservan la intención de diseño.
-- **Depuración quirúrgica:** cuando algo falla, editas solo el bloque culpable, no rescribes todo el prompt.
-- **Trazabilidad:** cada cambio queda fechado y razonado. Evita regresiones (volver a cometer un error ya corregido).
-- **Reutilizable:** el formato es agnóstico del lenguaje—funciona en Markdown, Python, YAML, JavaScript, SQL, cualquier cosa.
+Funciona con **cualquier modelo** que lea instrucciones (Claude, GPT, Gemini, DeepSeek…) y con cualquier herramienta donde escribas prompts. No hay nada que ajustar por modelo: es metodología, no código.
+
+## Los 5 pilares
+
+1. **Memoria por bloque** — cada parte del prompt lleva su comentario EVO. Ejemplo: la parte *"eres un arquitecto de IA con 10 años de experiencia"* se anota como `PERSONALIDAD` — sirve para fijar el rol y el nivel del modelo, y si un día falla, sabes exactamente qué tocar.
+2. **Ranking de dificultad 1–10** — antes de ejecutar, el modelo puntúa la tarea (¿hay documentación?, ¿es probable resolverla?). Si es 7+, primero mejora tu petición en vez de quemar días iterando.
+3. **Inventario de recursos** — ¿qué hay disponible en la sesión? MCPs, control del navegador, control remoto, y otros modelos como agentes: **GPT** para búsquedas web, **DeepSeek** como segunda opinión de bajo costo, **Gemini** para el ecosistema Google. MCP primero; si falla, control directo (siempre con tu permiso).
+4. **Evolución dirigida** — si dices "está mal", el modelo no parcha a ciegas: reconstruye *el prompt que le tendrías que haber dado* para que saliera como querías, edita solo el bloque culpable y anota el cambio fechado. El error no se repite.
+5. **Honestidad brutal** — si tu petición está mal planteada, te lo dice. Si la tarea es un 9/10 improbable, te lo dice antes de empezar. Si no estás cooperando con las respuestas que necesita, también te lo dice.
 
 ## Instalación
 
 ### En Claude Code
 
-Copia la carpeta `vibe/` a tu directorio de skills:
+Clona este repo dentro de tu directorio de skills:
 
 ```bash
 # macOS/Linux
-cp -r vibe/ ~/.claude/skills/
+git clone https://github.com/FrannRocha/Evopromting.git ~/.claude/skills/evoprompting
 
 # Windows PowerShell
-Copy-Item -Recurse vibe/ $env:USERPROFILE\.claude\skills\
+git clone https://github.com/FrannRocha/Evopromting.git $env:USERPROFILE\.claude\skills\evoprompting
 ```
 
-Luego invoca con `/vibe` en tu sesión.
+> Nota: la URL del repo dice `Evopromting` (nombre histórico); si el repo se renombra a `Evoprompting`, GitHub redirige la URL vieja automáticamente.
 
-### En otro proyecto
+Luego invócala con `/evoprompting` en tu sesión.
 
-Si no usas Claude Code, copia solo el archivo `SKILL.md` como referencia y usa la sintaxis de comentarios que se describe en la sección **Sintaxis por archivo** de este README.
+### En otra herramienta
+
+Si no usas Claude Code, copia el contenido de `SKILL.md` a tu system prompt o archivo de reglas (CLAUDE.md, .cursorrules, etc.). El formato de comentarios funciona en cualquier lugar donde escribas prompts.
 
 ## Uso rápido
 
-### 1. Anotar un bloque (automático en proyectos que adoptaron VIBE)
+| Comando | Qué hace |
+|---|---|
+| `/evoprompting anotar` | Comenta el bloque que acabas de crear/editar (automático en proyectos que adoptaron la skill) |
+| `/evoprompting auditar <archivo>` | Reporta bloques sin comentario, campos faltantes o historial mal fechado — sin tocar nada |
+| `/evoprompting arreglar <archivo>` | Completa y normaliza comentarios; muestra el diff y pide confirmación antes de escribir |
+| `/evoprompting evaluar <tarea>` | Dificultad 1–10 con razones + inventario de recursos + vía de ejecución + cooperación |
+| `/evoprompting mejorar <petición>` | Reescribe tu petición como un prompt estructurado por partes, cada parte anotada |
 
-Al crear o editar un prompt o instrucción, agrega justo debajo:
+## El formato del comentario
 
-```markdown
-<!-- VIBE · ETIQUETA: qué hace · POR QUÉ: razón · FUENTE: propio · EFECTIVIDAD: sin medir · CAMBIOS: ninguno -->
-```
-
-### 2. Auditar un archivo
-
-```bash
-/vibe auditar <archivo o skill>
-```
-
-Reporta bloques sin VIBE, campos faltantes o historial mal fechado.
-
-### 3. Arreglar un archivo
-
-```bash
-/vibe arreglar <archivo>
-```
-
-Completa y normaliza comentarios VIBE. Muestra el diff y pide confirmación antes de escribir.
-
-## Formato del comentario
-
-Justo **debajo** del bloque, con 5 campos:
+Justo **debajo** de cada bloque, con 5 campos:
 
 ```
-VIBE · <ETIQUETA>: <qué hace> · POR QUÉ: <razón / resultado esperado> · FUENTE: <origen> · EFECTIVIDAD: <medida concreta o "sin medir"> · CAMBIOS: <líneas AAAA-MM-DD → cambio y razón>
+EVO · <ETIQUETA>: <qué hace> · POR QUÉ: <razón / resultado esperado> · FUENTE: <origen> · EFECTIVIDAD: <medida concreta o "sin medir"> · CAMBIOS: <líneas AAAA-MM-DD → cambio y razón>
 ```
-
-**Campos:**
 
 | Campo | Ejemplo | Notas |
 |-------|---------|-------|
-| **ETIQUETA** | IDENTIDAD, FILTRO, ROUTER, SALIDA | 1–2 palabras que nombren el rol |
-| **POR QUÉ** | "evitar scams en la búsqueda" | la razón de diseño; qué se perdería si se quita |
-| **FUENTE** | "propio", "chamba/buscar.md", "internet" | trazabilidad |
+| **ETIQUETA** | PERSONALIDAD, FILTRO, ROUTER, SALIDA | 1–2 palabras que nombren el rol del bloque |
+| **POR QUÉ** | "fija el nivel con el que trabaja el modelo" | la razón de diseño; qué se perdería si se quita |
+| **FUENTE** | "propio", "docs de X", "internet" | trazabilidad |
 | **EFECTIVIDAD** | "sin medir", "probada: descartó scams" | inicia en `sin medir`; se actualiza con evidencia |
-| **CAMBIOS** | "ninguno" o "2026-06-27 → fix Rockwell" | cada edición agrega una línea fechada; historial nunca se borra |
+| **CAMBIOS** | "ninguno" o "2026-07-02 → fix del filtro" | cada edición agrega una línea fechada; el historial **nunca se borra** |
 
-## Sintaxis de comentario por archivo
+## Sintaxis por tipo de archivo
 
 Elige la sintaxis del lenguaje para que el comentario no rompa ni se ejecute:
 
 | Tipo | Sintaxis |
 |------|----------|
-| Markdown, HTML, XML, SVG | `<!-- VIBE · ... -->` |
-| YAML, TOML, shell, Python, Ruby | `# VIBE · ...` |
-| JS, TS, CSS, Java, Go, Rust | `// VIBE · ...` o `/* VIBE · ... */` |
-| JSX / TSX | lógica → `// ...`; dentro del `return` → `{/* VIBE · ... */}` |
-| SQL | `-- VIBE · ...` |
-| JSON estricto | archivo compañero `<archivo>.vibe.md` |
-| Archivos sin comentarios seguros | archivo compañero `<archivo>.vibe.md` |
-
-**Archivo compañero:** para archivos que no soportan comentarios (JSON, `.env`), crea `<archivo>.vibe.md`:
-
-```markdown
-### ETIQUETA — sección o ruta
-
-VIBE · ETIQUETA: qué hace · POR QUÉ: razón · ...
-```
+| Markdown, HTML, XML, SVG | `<!-- EVO · ... -->` |
+| YAML, TOML, shell, Python, Ruby | `# EVO · ...` |
+| JS, TS, CSS, Java, Go, Rust | `// EVO · ...` o `/* EVO · ... */` |
+| JSX / TSX | lógica → `// ...`; dentro del `return` → `{/* EVO · ... */}` |
+| SQL | `-- EVO · ...` |
+| JSON estricto, `.env` | archivo compañero `<archivo>.evo.md` |
+| Sin comentarios seguros | archivo compañero `<archivo>.evo.md` |
 
 ## Cuándo sí y cuándo no
 
-✅ **SÍ** — instrucciones internas para IA (SKILL.md, system prompts, reglas de CLAUDE.md, prompts de agentes).
+✅ **SÍ** — instrucciones internas para IA: SKILL.md, system prompts, reglas de CLAUDE.md, prompts de agentes y herramientas.
 
-❌ **NO** — entregables que ve el cliente (landing HTML, README publicado, UI, correos). Si es un archivo que publicas o entregas, **no lleva VIBE**, aunque su lenguaje lo permita.
+❌ **NO** — entregables que ve el cliente: landing HTML, README publicado, UI, correos. Si el archivo es algo que publicas o entregas, **no lleva EVO**, aunque su lenguaje lo permita.
 
-*Criterio:* ¿Es un entregable final? → No VIBE. ¿Es instrucción interna de IA? → Sí VIBE.
+*Criterio:* ¿Es un entregable final? → No. ¿Es instrucción interna de IA? → Sí.
 
-## Adoptar VIBE en un proyecto nuevo
+## El loop de evolución
+
+1. **Evalúa** antes de ejecutar: dificultad 1–10, recursos, entorno, cooperación.
+2. **Anota** cada bloque de prompt con su comentario EVO.
+3. Cuando algo falle, **reconstruye** el prompt que sí habría funcionado ("¿qué me tendrían que haber pedido para hacerlo tal cual?").
+4. **Edita solo el bloque culpable** y agrega la línea fechada a su historial.
+
+Así el prompt mejora con cada iteración en minutos, no en días — y la calidad no se sacrifica por el tiempo.
+
+## Adoptar Evoprompting en un proyecto
 
 Agrega a tu `CLAUDE.md` o `SKILL.md`:
 
 ```markdown
-**VIBE activo en este proyecto.** En todo prompt/instrucción interna que la IA lee (no en entregables que ve el cliente), agrega debajo de cada bloque:
+**Evoprompting activo en este proyecto.** En todo prompt/instrucción interna que la IA lee
+(no en entregables que ve el cliente), agrega debajo de cada bloque:
 
-`VIBE · ETIQUETA: qué hace · POR QUÉ: razón / resultado · FUENTE: de dónde salió · EFECTIVIDAD: sin medir · CAMBIOS: AAAA-MM-DD → qué cambió`
+`EVO · ETIQUETA: qué hace · POR QUÉ: razón / resultado · FUENTE: de dónde salió · EFECTIVIDAD: sin medir · CAMBIOS: AAAA-MM-DD → qué cambió`
 
-Al editar un bloque, agrega una línea fechada a `CAMBIOS` y nunca borres el historial. Detalle: skill `vibe`.
+Al editar un bloque, agrega una línea fechada a `CAMBIOS` y nunca borres el historial.
+Ante feedback negativo, reconstruye el prompt que sí habría funcionado y edita solo el
+bloque culpable. Detalle: skill `evoprompting`.
 ```
 
-Eso activa el automatismo **solo en ese proyecto**, sin sobre-activar en los demás.
+Eso activa el automatismo **solo en ese proyecto**, sin sobre-activarlo en los demás.
 
 ## Ejemplo real
 
 ```python
-# Sistema de filtro para descartar scams
 def filter_scams(listings):
     """Remove known phishing/scam patterns."""
-    # VIBE · FILTRO: bloquea URLs sospechosas y palabras clave de scam en título. POR QUÉ: redacción "garantía 100%" y URLs acortadas son marca de estafa; descartar evita reportes falsos. FUENTE: chamba/buscar.md. EFECTIVIDAD: probada — descartó 8 scams en testing. CAMBIOS: 2026-06-27 → añadido "garantía" tras falso positivo; 2026-06-28 → mejorada regex de URLs.
+    # EVO · FILTRO: bloquea URLs sospechosas y palabras clave de scam en título. POR QUÉ: redacción "garantía 100%" y URLs acortadas son marca de estafa; descartar evita reportes falsos. FUENTE: propio. EFECTIVIDAD: probada — descartó 8 scams en testing. CAMBIOS: 2026-06-27 → añadido "garantía" tras falso positivo; 2026-06-28 → mejorada regex de URLs.
     return [x for x in listings if not any(bad in x for bad in SCAM_PATTERNS)]
 ```
 
-## Loop de mantenimiento
-
-1. **Ubica** el bloque culpable leyendo los comentarios VIBE.
-2. **Edita** solo ese bloque (no reescribas todo).
-3. **Anota** en su `CAMBIOS` qué cambiaste y por qué (fecha + razón).
-
-Así, los prompts se depuran por partes—como se comenta y refactoriza código.
-
-## Relación con poweredchamba
-
-Esta skill `vibe` es la **fuente de verdad** del formato. Si trabajas con `chamba` o `poweredchamba`, ya está vibe-promteado y declara VIBE como obligatorio. Trátalas como proyectos adoptados.
+Más ejemplos (Markdown, YAML, JSX, SQL, JSON, evaluación de tareas) en [`example.md`](example.md).
 
 ## FAQ
 
-**P: ¿Los comentarios VIBE son invisibles a la IA?**  
-R: No. El modelo lee los comentarios (es su memoria de mantenimiento). Eso está bien—**para** que la IA entienda por qué el prompt está escrito así.
+**P: ¿Los comentarios EVO son invisibles a la IA?**
+R: No, y esa es la idea. El modelo lee los comentarios — son su memoria de mantenimiento, para que entienda por qué el prompt está escrito así y dónde está parado.
 
-**P: ¿Cuándo uso `/vibe` vs. solo comentar a mano?**  
-R: En proyectos que adoptaron VIBE (lo dice su CLAUDE.md), los comentarios son **automáticos**—no hace falta invocar `/vibe`. Invoca `/vibe` para auditar (`/vibe auditar`), arreglar en lote (`/vibe arreglar`), o en proyectos que no la adoptaron.
+**P: ¿Tenía otro nombre antes?**
+R: Sí — la v1 se llamó VIBE. Los comentarios `VIBE · ...` en proyectos existentes son el mismo formato con el tag viejo: se leen igual y se migran a `EVO` al editarlos, sin borrar su historial.
 
-**P: ¿Puedo usarlo en prompts de otras herramientas (OpenAI API, LangChain, etc.)?**  
-R: Sí. VIBE es agnóstico—la metodología y el formato funcionan en cualquier lugar donde escribas prompts. Solo adaptá la sintaxis de comentario al lenguaje.
+**P: ¿Puedo usarlo con otras herramientas (OpenAI API, Cursor, LangChain, etc.)?**
+R: Sí. La metodología es agnóstica — solo adapta la sintaxis de comentario al lenguaje.
 
-**P: ¿Y si mi prompt es una sola línea?**  
-R: Una línea todavía es un bloque. Comenta debajo. Si es *muy* chica, quizá un archivo compañero `.vibe.md` sea más limpio.
+**P: ¿Y si mi prompt es una sola línea?**
+R: Una línea todavía es un bloque. Comenta debajo. Si es *muy* chica, quizá un archivo compañero `.evo.md` sea más limpio.
 
 ## Licencia
 
@@ -161,4 +143,4 @@ MIT — úsalo, cópialo, remixalo como quieras.
 
 ## Créditos
 
-Idea original: Francisco (2026-06-25), basada en la práctica de comentar y refactorizar código.
+Idea original: Francisco (2026-06-25), nacida de la práctica de dejar comentarios en el código para que la IA sepa qué es cada cosa, para qué sirve y dónde está parada — aplicada a los prompts mismos.

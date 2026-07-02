@@ -1,6 +1,6 @@
 # Contribuciones
 
-¡Gracias por querer mejorar VIBE!
+¡Gracias por querer mejorar Evoprompting!
 
 ## Cómo reportar bugs
 
@@ -10,11 +10,11 @@ Si encontraste un problema:
    - Descripción clara del problema.
    - Pasos para reproducir.
    - Comportamiento esperado vs. actual.
-   - Tu contexto (qué tipo de archivo, qué lenguaje, etc.).
+   - Tu contexto (qué tipo de archivo, qué lenguaje, qué modelo de IA, etc.).
 
 ## Cómo proponer mejoras
 
-¿Tienes una idea para mejorar VIBE?
+¿Tienes una idea para mejorar Evoprompting?
 1. Abre un issue con la etiqueta `enhancement` describiendo:
    - El problema que resuelve.
    - Cómo afecta a los usuarios.
@@ -25,16 +25,17 @@ Si encontraste un problema:
 
 1. Haz un **fork** del repo.
 2. Crea una rama: `git checkout -b feature/tu-idea`.
-3. Haz tus cambios respetando **VIBE** (este proyecto usa VIBE promting para documentar cambios en instrucciones).
+3. Haz tus cambios respetando **Evoprompting** (este proyecto se aplica la metodología a sí mismo: cada bloque de `SKILL.md` lleva su comentario EVO).
 4. Actualiza `README.md` y `SKILL.md` si hay cambios en el formato.
 5. Envía un PR describiendo qué cambia y por qué.
 
 ## Estándar de código
 
 - Mantén el formato limpio.
-- Los comentarios VIBE llevan **5 campos** (ver `SKILL.md` §3).
+- Los comentarios EVO llevan **5 campos** (ver `SKILL.md` §3).
 - Nunca borres el historial de `CAMBIOS`.
 - Si editas una sección, anota tu cambio en `CAMBIOS` con fecha.
+- Si encuentras un tag `VIBE ·` (v1 del formato), migra a `EVO ·` al editar ese bloque, conservando el historial (ver `SKILL.md` §13).
 
 ## Preguntas
 
@@ -42,4 +43,4 @@ Abre un issue con la etiqueta `question` o contáctame en LinkedIn.
 
 ---
 
-Gracias por contribuir a que VIBE sea mejor. 🙌
+Gracias por contribuir a que Evoprompting sea mejor. 🙌
