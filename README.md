@@ -18,19 +18,26 @@ Funciona con **cualquier modelo** que lea instrucciones (Claude, GPT, Gemini, De
 
 ## Instalación
 
-### En Claude Code
-
-Clona este repo dentro de tu directorio de skills:
+### En Claude Code (recomendada: skill + barra integrada)
 
 ```bash
-# macOS/Linux
 git clone https://github.com/FrannRocha/Evoprompting.git ~/.claude/skills/evoprompting
-
-# Windows PowerShell
-git clone https://github.com/FrannRocha/Evoprompting.git $env:USERPROFILE\.claude\skills\evoprompting
+bash ~/.claude/skills/evoprompting/install.sh
 ```
 
-Luego invócala con `/evoprompting` en tu sesión.
+Eso instala la skill **y** la barra integrada DF/Promt en la statusline de Claude Code. Reinicia tu sesión y tendrás `/evoprompting` y los chips en la barra. (En Windows, corre los comandos desde Git Bash o WSL.)
+
+**¿Quieres DF/Promt en TODOS tus proyectos, aunque no usen Evoprompting?**
+
+```bash
+bash ~/.claude/skills/evoprompting/install.sh --siempre
+```
+
+Agrega una regla global para que Claude califique cada tarea (dificultad + calidad de tu prompt) y actualice la barra siempre — y cuando tu prompt salga flojo (≤ 6), te dice en una línea cómo plantearlo mejor la próxima vez. Útil para iterar mejor en cualquier proyecto.
+
+### Solo la skill, sin barra
+
+Clona el repo a `~/.claude/skills/evoprompting` (primer comando de arriba) y no corras `install.sh`. Invócala con `/evoprompting`.
 
 ### En otra herramienta
 
@@ -118,10 +125,20 @@ Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con es
 📊 Dificultad: 6/10 ██████░░░░ · Prompt: 7/10 ███████░░░
 ```
 
-- **Dificultad** — qué tan difícil es la tarea (¿hay documentación?, ¿qué probabilidad hay de resolverla con los recursos de la sesión?).
-- **Prompt** — qué tan bien planteada estaba tu petición (claridad, contexto, restricciones). Sube si dejas que Claude la evoprompteé antes de ejecutar.
+- **Dificultad (DF)** — qué tan difícil es la tarea (¿hay documentación?, ¿qué probabilidad hay de resolverla con los recursos de la sesión?).
+- **Prompt** — qué tan bien planteada estaba tu petición (claridad, contexto, restricciones). Sube si dejas que Claude la evoprompteé antes de ejecutar. Si sale ≤ 6, Claude te dice en una línea cómo plantearla mejor para la siguiente iteración.
 
 Si el trabajo termina en un pull request, la calificación se repite al final del título del PR y la barra al inicio de su descripción.
+
+### La barra integrada a la UI (statusline)
+
+Con `install.sh`, DF y Promt también aparecen como **chips nativos en la barra inferior de Claude Code**, con color según el valor (DF alto = rojo, prompt bien planteado = verde):
+
+```
+Evoprompting  DF 5/10  Promt 9/10
+```
+
+Funciona así: cada vez que Claude califica, escribe las notas en `~/.claude/evo-score`, y el `statusline.sh` del repo las pinta en la barra. Es la statusline oficial de Claude Code — totalmente integrada, sin hacks. Aplica en la CLI y la app de escritorio (la web no tiene statusline).
 
 ## Ejemplos reales
 

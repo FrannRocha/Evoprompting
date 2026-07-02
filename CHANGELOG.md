@@ -2,6 +2,13 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.2.0] — 2026-07-02
+
+### Added
+- **Barra integrada a la UI de Claude Code** (`statusline.sh`): chips `DF N/10 · Promt M/10` en la statusline nativa, con color por rango (DF alto = rojo, prompt bien planteado = verde). La skill escribe las notas en `~/.claude/evo-score` (regla nueva en `SKILL.md` §6.1) y el script las pinta.
+- **`install.sh`**: instala la skill y configura la statusline sin pisar una existente. Con `--siempre`, agrega una regla global (`~/.claude/CLAUDE.md`) para que DF/Promt se califiquen en **todos** los proyectos, aunque no usen Evoprompting — pensado para ayudar a iterar en cualquier lado.
+- **Tip de iteración**: cuando Prompt ≤ 6, Claude dice en una línea cómo plantear mejor la próxima petición (en el chat y como parte del marcador permanente).
+
 ## [2.1.0] — 2026-07-02
 
 ### Added
