@@ -2,6 +2,14 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.1.0] — 2026-07-02
+
+### Added
+- **Barra de calificación visible en Claude** (`SKILL.md` §6.1): al evaluar una tarea, la respuesta en el chat abre con `📊 Dificultad: N/10 ██████░░░░ · Prompt: M/10 ███████░░░` seguida de las razones de cada nota. Los PRs conservan la línea corta en el título y la barra al inicio del cuerpo. Aplica a cualquiera que instale la skill.
+
+### Changed
+- README: la sección de ejemplo ahora muestra **los dos casos** — prompt (el principal, con el ciclo completo de evolución ante feedback) y código — y documenta la barra de calificación.
+
 ## [2.0.1] — 2026-07-02
 
 ### Fixed

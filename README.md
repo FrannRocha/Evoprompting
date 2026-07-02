@@ -24,13 +24,11 @@ Clona este repo dentro de tu directorio de skills:
 
 ```bash
 # macOS/Linux
-git clone https://github.com/FrannRocha/Evopromting.git ~/.claude/skills/evoprompting
+git clone https://github.com/FrannRocha/Evoprompting.git ~/.claude/skills/evoprompting
 
 # Windows PowerShell
-git clone https://github.com/FrannRocha/Evopromting.git $env:USERPROFILE\.claude\skills\evoprompting
+git clone https://github.com/FrannRocha/Evoprompting.git $env:USERPROFILE\.claude\skills\evoprompting
 ```
-
-> Nota: la URL del repo dice `Evopromting` (nombre histórico); si el repo se renombra a `Evoprompting`, GitHub redirige la URL vieja automáticamente.
 
 Luego invócala con `/evoprompting` en tu sesión.
 
@@ -112,7 +110,42 @@ bloque culpable. Detalle: skill `evoprompting`.
 
 Eso activa el automatismo **solo en ese proyecto**, sin sobre-activarlo en los demás.
 
-## Ejemplo real
+## La barra de calificación
+
+Cada vez que Claude evalúa una tarea con Evoprompting, su respuesta abre con esta barra — la ves directo en el chat, igual que ves los contadores `+287 −171` de GitHub:
+
+```
+📊 Dificultad: 6/10 ██████░░░░ · Prompt: 7/10 ███████░░░
+```
+
+- **Dificultad** — qué tan difícil es la tarea (¿hay documentación?, ¿qué probabilidad hay de resolverla con los recursos de la sesión?).
+- **Prompt** — qué tan bien planteada estaba tu petición (claridad, contexto, restricciones). Sube si dejas que Claude la evoprompteé antes de ejecutar.
+
+Si el trabajo termina en un pull request, la calificación se repite al final del título del PR y la barra al inicio de su descripción.
+
+## Ejemplos reales
+
+### Caso 1: en un prompt (el caso principal)
+
+Un prompt anotado por partes. La parte de personalidad, versión 1:
+
+```markdown
+Eres un arquitecto de IA con 10 años de experiencia.
+<!-- EVO · PERSONALIDAD: fija el rol y el nivel con el que trabaja el modelo. POR QUÉ: sin esto las respuestas salen genéricas, de nivel principiante. FUENTE: propio. EFECTIVIDAD: sin medir. CAMBIOS: ninguno. -->
+```
+
+El usuario da feedback: *"las respuestas salen muy teóricas, yo quiero pasos que pueda seguir"*. Evoprompting no parcha a ciegas — reconstruye el prompt que sí habría funcionado y edita **solo el bloque culpable**, dejando el porqué en el historial:
+
+```markdown
+Eres un arquitecto de IA con 10 años de experiencia implementando sistemas en producción; siempre respondes con pasos accionables, no con teoría.
+<!-- EVO · PERSONALIDAD: fija rol, nivel y estilo ACCIONABLE. POR QUÉ: el rol solo daba respuestas teóricas; "en producción + pasos accionables" fuerza salidas ejecutables. FUENTE: feedback del usuario 2026-07-02. EFECTIVIDAD: falló v1 (teórica); v2 en prueba. CAMBIOS: 2026-07-02 → +"en producción" y "pasos accionables": el usuario quería instrucciones, no teoría. -->
+```
+
+El prompt evolucionó, el error quedó documentado y no se repite. Eso es Evoprompting.
+
+### Caso 2: en código
+
+El mismo formato funciona en cualquier lenguaje — aquí, lógica escrita por IA en Python:
 
 ```python
 def filter_scams(listings):
